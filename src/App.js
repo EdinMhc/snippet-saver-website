@@ -1,9 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import NavBar from './Components/NavBar';
+import SnippetsContent from './Components/SnippetContent';
+import FooterNotes from './Components/FooterNotes';
+import './Styles/App.css';
 
 function App() {
   return (
-    <h1>Edin</h1>
+    <div className="App">
+      <NavBar />
+      <SnippetsContent />
+      <FooterNotes />
+    </div>
   );
 }
 
