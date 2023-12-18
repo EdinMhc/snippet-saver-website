@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './Components/NavBar';
-import SnippetsContent from './Components/SnippetContent';
+import SnippetsContent from './Components/SnippetsContent';
 import FooterNotes from './Components/FooterNotes';
 import './Styles/App.css';
 
