@@ -1,0 +1,24 @@
+.snippets-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+}
+
+.snippet {
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.snippet-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.snippet-content {
+    font-family: 'Times New Roman', Times, serif;
+}
