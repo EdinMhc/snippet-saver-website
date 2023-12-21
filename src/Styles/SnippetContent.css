@@ -16,6 +16,7 @@
     min-height: 100px;
     max-height: auto;
     overflow: hidden;
+    height: auto;
 }
 
 .snippet-title {
