@@ -4,13 +4,14 @@ nav, footer {
 }
 
 .App {
-  width: 100%;
-  overflow: hidden;
+  justify-content: center; /* Center the grid layout */
+  align-items: start;
   padding: 20px;
+  width: 100%; /* Ensure full width */
+  overflow: hidden;
 }
 
 div.App {
-  display: flex;
     justify-content: space-between;
     align-items: start;
     padding: 20px;
@@ -18,17 +19,32 @@ div.App {
 
 div.App > div {
   flex-grow: 1;
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: start;
   padding: 20px;
 }
 
-.left-area, .right-area {
-  flex-basis: 50%;
-  width: 50%;
-  float: left;
-  min-height: 500px;
+.layout {
+  background-color: #222121;
+  border: 1px solid #252525;
+  padding: 10px;
+}
+
+.layout .react-grid-item {
   border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.layout .react-grid-item > div {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }

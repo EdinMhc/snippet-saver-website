@@ -3,112 +3,121 @@ import NavBar from './Components/NavBar';
 import SnippetsContent from './Components/SnippetsContent';
 import FooterNotes from './Components/FooterNotes';
 import './Styles/App.css';
-import { DragDropContext } from 'react-beautiful-dnd';
+import GridLayout from 'react-grid-layout';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
 function App() {
-  const [snippetsLeft, setSnippetsLeft] = useState([
-    {
-      id: "1",
-      code: "Some code snippet or content here...",
-      isFavorite: true,
-      name: "path",
-      url: ""
-  },
-  {
-      id: "2",
-      "code": "1CA43ED7E9310CB811A98CE4D485E20881DA8D6575BB3DFB8FE3DC5F2A6D4AA8021C75D95BC5F2E07FC06CDBDD16409A82F6DEB23BF9886BDC59483DC525CBA67BB37954FAB24D9DDA1C91E351F227DA58CE3873C7BDBB2365313738B249C2DE99AE86287D21A7199BC71745E85B67FE741019F20C572648828380052A6DC849",
-      "isFavorite": true,
-      "name": "parameters",
-      "url": ""
-    },
-    {
-      id: "3",
-      "code": "{\n  \"pipingVariableNameCollection\": [\n    \"OptOut:CompanyLink\"\n  ],\n  \"emailAddressCollection\": [\n    {\n      \"respondentId\": 0,\n      \"emailAddress\": \"string@string.com\",\n      \"customHeaders\": {\n        \"additionalProp1\": \"string\",\n        \"additionalProp2\": \"string\",\n        \"additionalProp3\": \"string\"\n      }\n    }\n  ]\n}",
-      "isFavorite": true,
-      "name": "json filter",
-      "url": "http://localhost:5000/swagger/index.html"
-    },
-    {
-      id: "4",
-      "code": "<label for=\"checkbox1702042728770\"></label><input type=\"checkbox\" id=\"checkbox1702042728770\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Themes black and white<div><br></div><div><label for=\"checkbox1702042754588\"></label><input type=\"checkbox\" id=\"checkbox1702042754588\" style=\"width: 12px; height: 12px;\">Search</div><div><br></div><div><label for=\"checkbox1702042753267\"></label><input type=\"checkbox\" id=\"checkbox1702042753267\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Json save file potential import feature</div><div><br></div><div><label for=\"checkbox1702042752060\"></label><input type=\"checkbox\" id=\"checkbox1702042752060\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Settings</div><div><br></div><div><label for=\"checkbox1702474771725\"></label><input type=\"checkbox\" id=\"checkbox1702474771725\"> Background script for popup.html so it has a cache feature<br></div>",
-      "isFavorite": false,
-      "name": "TODO Snippets",
-      "url": ""
-    },
-    {
-      id: "5",
-      "code": "",
-      "isFavorite": false,
-      "name": "Telepresence codes",
-      "url": "https://forsta.atlassian.net/wiki/spaces/FEH/pages/3234695260/How+to+use+Laptop+with+remote+k8s+environment"
-    }
-  ]);
-  const [snippetsRight, setSnippetsRight] = useState([]);
-
-  const leftAreaRef = useRef(null);
-  const rightAreaRef = useRef(null);
+  const [gridWidth, setGridWidth] = useState(window.innerWidth);
+  const gridRef = useRef(null);
 
   useEffect(() => {
-    const droppableAreas = document.querySelectorAll('[data-rbd-droppable-context-id="0"]');
-        if (droppableAreas.length === 0) return;
+    // Function to update width
+    const updateWidth = () => {
+        if (gridRef.current) {
+            setGridWidth(gridRef.current.offsetWidth);
+        } else {
+            setGridWidth(window.innerWidth);
+        }
+    };
 
-        const maxHeight = Array.from(droppableAreas).reduce((max, area) => {
-            return Math.max(max, area.offsetHeight);
-        }, 500);
+    // Update width on mount and window resize
+    window.addEventListener('resize', updateWidth);
+    updateWidth();
 
-        droppableAreas.forEach(area => {
-            area.style.minHeight = `${maxHeight}px`;
-            area.style.minWidth = `100%`;
-        });
-});
+    // Cleanup
+    return () => window.removeEventListener('resize', updateWidth);
+}, []);
 
-  const onDragEnd = (result) => {
-    const { source, destination } = result;
-
-    if (!destination) {
-        return;
+  const [snippets, setSnippets] = useState([
+    {
+        id: "1",
+        name: "path",
+        code: "Some code snippet or content here...",
+        isFavorite: true,
+        url: "",
+        x: 0, y: 0, w: 3, h: 2
+    },
+    {
+        id: "2",
+        name: "parameters",
+        code: "1CA43ED7E9310CB811A98CE4D485E20881DA8D6575BB3DFB8FE3DC5F2A6D4AA8021C75D95BC5F2E07FC06CDBDD16409A82F6DEB23BF9886BDC59483DC525CBA67BB37954FAB24D9DDA1C91E351F227DA58CE3873C7BDBB2365313738B249C2DE99AE86287D21A7199BC71745E85B67FE741019F20C572648828380052A6DC849",
+        isFavorite: true,
+        url: "",
+        x: 2, y: 0, w: 3, h: 2
+    },
+    {
+        id: "3",
+        name: "json filter",
+        code: "{\n  \"pipingVariableNameCollection\": [\n    \"OptOut:CompanyLink\"\n  ],\n  \"emailAddressCollection\": [\n    {\n      \"respondentId\": 0,\n      \"emailAddress\": \"string@string.com\",\n      \"customHeaders\": {\n        \"additionalProp1\": \"string\",\n        \"additionalProp2\": \"string\",\n        \"additionalProp3\": \"string\"\n      }\n    }\n  ]\n}",
+        isFavorite: true,
+        url: "http://localhost:5000/swagger/index.html",
+        x: 4, y: 0, w: 3, h: 2
+    },
+    {
+        id: "4",
+        name: "TODO Snippets",
+        code: "<label for=\"checkbox1702042728770\"></label><input type=\"checkbox\" id=\"checkbox1702042728770\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Themes black and white<div><br></div><div><label for=\"checkbox1702042754588\"></label><input type=\"checkbox\" id=\"checkbox1702042754588\" style=\"width: 12px; height: 12px;\">Search</div><div><br></div><div><label for=\"checkbox1702042753267\"></label><input type=\"checkbox\" id=\"checkbox1702042753267\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Json save file potential import feature</div><div><br></div><div><label for=\"checkbox1702042752060\"></label><input type=\"checkbox\" id=\"checkbox1702042752060\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Settings</div><div><br></div><div><label for=\"checkbox1702474771725\"></label><input type=\"checkbox\" id=\"checkbox1702474771725\"> Background script for popup.html so it has a cache feature<br></div>",
+        isFavorite: false,
+        url: "",
+        x: 6, y: 0, w: 3, h: 2
+    },
+    {
+        id: "5",
+        name: "Telepresence codes",
+        code: "",
+        isFavorite: false,
+        url: "https://forsta.atlassian.net/wiki/spaces/FEH/pages/3234695260/How+to+use+Laptop+with+remote+k8s+environment",
+        x: 8, y: 0, w: 3, h: 2
     }
+]);
 
-    if (source.droppableId === destination.droppableId) {
-        const sourceSnippets = source.droppableId === "left" ? snippetsLeft : snippetsRight;
-        const setSourceSnippets = source.droppableId === "left" ? setSnippetsLeft : setSnippetsRight;
 
-        const newSnippets = Array.from(sourceSnippets);
-        const [reorderedItem] = newSnippets.splice(source.index, 1);
-        newSnippets.splice(destination.index, 0, reorderedItem);
+  const layout = snippets.map(snippet => ({
+    i: snippet.id.toString(),
+    x: snippet.x || 0,
+    y: snippet.y || 0,
+    w: snippet.w || 2,
+    h: snippet.h || 2
+}));
 
-        setSourceSnippets(newSnippets);
-    } else {
-        const sourceSnippets = source.droppableId === "left" ? snippetsLeft : snippetsRight;
-        const destinationSnippets = destination.droppableId === "left" ? snippetsLeft : snippetsRight;
-        const setSourceSnippets = source.droppableId === "left" ? setSnippetsLeft : setSnippetsRight;
-        const setDestinationSnippets = destination.droppableId === "left" ? setSnippetsLeft : setSnippetsRight;
-
-        const sourceClone = Array.from(sourceSnippets);
-        const destClone = Array.from(destinationSnippets);
-        const [removed] = sourceClone.splice(source.index, 1);
-
-        destClone.splice(destination.index, 0, removed);
-
-        setSourceSnippets(sourceClone);
-        setDestinationSnippets(destClone);
-    }
+const onLayoutChange = (newLayout) => {
+  const updatedSnippets = newLayout.map(layoutItem => {
+      const snippet = snippets.find(snip => snip.id === layoutItem.i);
+      return {
+          ...snippet,
+          x: layoutItem.x,
+          y: layoutItem.y,
+          w: Math.max(layoutItem.w, 3),
+          h: layoutItem.h
+      };
+  });
+  setSnippets(updatedSnippets);
 };
 
-  return (
-    <DragDropContext onDragEnd={onDragEnd}>
-        <NavBar />
+return (
+  <>
+      <NavBar />
       <div className="App">
-        <div className="left-area" ref={leftAreaRef}>
-              <SnippetsContent droppableId="left" snippets={snippetsLeft} updateSnippets={setSnippetsLeft}/>
-          </div>
-          <div className="right-area" ref={rightAreaRef}>
-              <SnippetsContent droppableId="right" snippets={snippetsRight} updateSnippets={setSnippetsRight} />
-          </div>
+      <GridLayout
+                className="layout"
+                layout={layout}
+                cols={12}
+                rowHeight={30}
+                width={gridWidth}
+                onLayoutChange={onLayoutChange}
+            >
+                {snippets.map(snippet => (
+                    <div key={snippet.id}>
+                        <h3>{snippet.name}</h3>
+                        <p>{snippet.code}</p>
+                    </div>
+                ))}
+            </GridLayout>
       </div>
       <FooterNotes />
-    </DragDropContext>
-  );
+  </>
+);
 }
 
 export default App;
