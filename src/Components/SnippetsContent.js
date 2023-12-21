@@ -2,17 +2,9 @@ import React from 'react';
 import '../Styles/SnippetContent.css';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-function SnippetsContent({ snippets, updateSnippets }) {
-    const reorderSnippets = (startIndex, endIndex) => {
-        const result = Array.from(snippets);
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
-
-        updateSnippets(result);
-    };
-
+function SnippetsContent({ droppableId, snippets, updateSnippets }) {
     return (
-        <Droppable droppableId="snippets">
+        <Droppable droppableId={droppableId}>
             {(provided) => (
                 <div 
                     className="snippets-container" 
