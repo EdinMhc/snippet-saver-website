@@ -11,6 +11,7 @@ function SnippetsContent({ droppableId, snippets, updateSnippets }) {
                     {...provided.droppableProps} 
                     ref={provided.innerRef}
                 >
+                    <div className="snippets-wrapper">
                     {snippets.map((snippet, index) => (
                         <Draggable key={snippet.id.toString()} draggableId={snippet.id.toString()} index={index}>
                             {(provided) => (
@@ -26,6 +27,7 @@ function SnippetsContent({ droppableId, snippets, updateSnippets }) {
                             )}
                         </Draggable>
                     ))}
+                    </div>
                     {provided.placeholder}
                 </div>
             )}
