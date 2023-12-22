@@ -9,6 +9,7 @@ nav, footer {
   padding: 20px;
   width: 100%;
   overflow: hidden;
+  min-height: 100vh;
 }
 
 div.App {
@@ -23,6 +24,10 @@ div.App > div {
   justify-content: center;
   align-items: start;
   padding: 20px;
+}
+
+footer {
+  margin-top: auto; /* Push footer to the bottom */
 }
 
 .layout {

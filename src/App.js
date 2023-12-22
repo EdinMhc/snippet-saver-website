@@ -23,7 +23,7 @@ function calculateSnippetHeight(snippet) {
 }
 
 function App() {
-  const [gridWidth, setGridWidth] = useState(window.innerWidth);
+  const [gridWidth] = useState(window.innerWidth);
   const rowHeight = 60;
   useEffect(() => {
     const updatedSnippets = snippets.map(snippet => {
@@ -54,7 +54,7 @@ function App() {
         code: "1CA43ED7E9310CB811A98CE4D485E20881DA8D6575BB3DFB8FE3DC5F2A6D4AA8021C75D95BC5F2E07FC06CDBDD16409A82F6DEB23BF9886BDC59483DC525CBA67BB37954FAB24D9DDA1C91E351F227DA58CE3873C7BDBB2365313738B249C2DE99AE86287D21A7199BC71745E85B67FE741019F20C572648828380052A6DC849",
         isFavorite: true,
         url: "",
-        x: 2, y: 0, w: 3, h: 2
+        x: 0, y: 0, w: 3, h: 2
     },
     {
         id: "3",
@@ -70,7 +70,7 @@ function App() {
         code: "<label for=\"checkbox1702042728770\"></label><input type=\"checkbox\" id=\"checkbox1702042728770\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Themes black and white<div><br></div><div><label for=\"checkbox1702042754588\"></label><input type=\"checkbox\" id=\"checkbox1702042754588\" style=\"width: 12px; height: 12px;\">Search</div><div><br></div><div><label for=\"checkbox1702042753267\"></label><input type=\"checkbox\" id=\"checkbox1702042753267\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Json save file potential import feature</div><div><br></div><div><label for=\"checkbox1702042752060\"></label><input type=\"checkbox\" id=\"checkbox1702042752060\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Settings</div><div><br></div><div><label for=\"checkbox1702474771725\"></label><input type=\"checkbox\" id=\"checkbox1702474771725\"> Background script for popup.html so it has a cache feature<br></div>",
         isFavorite: false,
         url: "",
-        x: 6, y: 0, w: 3, h: 2
+        x: 4, y: 0, w: 3, h: 2
     },
     {
         id: "5",
@@ -86,7 +86,7 @@ function App() {
         "isFavorite": false,
         "name": "Out of memory exception",
         "url": "",
-        x: 10, y: 0, w: 3, h: 2
+        x: 8, y: 0, w: 3, h: 2
       },
       {
         id: "7",
@@ -94,7 +94,7 @@ function App() {
         isFavorite: false,
         name: "Netflix account and password",
         url : "",
-        x: 10, y: 0, w: 3, h: 2
+        x: 8, y: 0, w: 3, h: 2
       },
 ]);
 
