@@ -4,10 +4,10 @@ nav, footer {
 }
 
 .App {
-  justify-content: center; /* Center the grid layout */
+  justify-content: center;
   align-items: start;
   padding: 20px;
-  width: 100%; /* Ensure full width */
+  width: 100%;
   overflow: hidden;
 }
 
@@ -26,15 +26,15 @@ div.App > div {
 }
 
 .layout {
-  background-color: #222121;
-  border: 1px solid #252525;
+  /* background-color: #222121;
+  border: 1px solid #252525; */
   padding: 10px;
 }
 
 .layout .react-grid-item {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
   overflow: hidden;
   display: flex; 
   justify-content: center;
