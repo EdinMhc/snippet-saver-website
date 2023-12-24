@@ -2,59 +2,15 @@ import React, { useState, useEffect } from 'react';
 import NavBar from './Components/NavBar';
 import SnippetsContent from './Components/SnippetsContent';
 import FooterNotes from './Components/FooterNotes';
-import './Styles/App.css';
 import GridLayout from 'react-grid-layout';
+import { calculateSnippetHeight, generateLayout } from './Utils/layoutUtils/calculateSnippetHeight';
+import useWindowSize from './hooks/useWindowSize';
+import './Styles/App.css';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
-function calculateSnippetHeight(snippet) {
-  const tempDiv = document.createElement('div');
-  tempDiv.style.width = '300px';
-  tempDiv.style.visibility = 'hidden';
-  tempDiv.innerHTML = `<div class='snippet-content'>${snippet.code}</div>`;
-
-  document.body.appendChild(tempDiv);
-
-  const height = tempDiv.offsetHeight;
-
-  document.body.removeChild(tempDiv);
-
-  return height;
-}
-
 function App() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const [gridWidth] = useState(window.innerWidth);
-  const rowHeight = 60;
-  useEffect(() => {
-    const updatedSnippets = snippets.map(snippet => {
-        const height = calculateSnippetHeight(snippet);
-        const gridHeight = Math.ceil(height / rowHeight);
-
-        return {
-            ...snippet,
-            h: Math.max(gridHeight, 2)
-        };
-    });
-
-    setSnippets(updatedSnippets);
-}, []);
+  const windowSize = useWindowSize();
 
   const [snippets, setSnippets] = useState([
     {
@@ -129,53 +85,50 @@ function App() {
         url : "",
         x: 9, y: 0, w: 3, h: 2
       },
-]);
+  ]);
 
-  const layout = snippets.map(snippet => ({
-    i: snippet.id.toString(),
-    x: snippet.x || 0,
-    y: snippet.y || 0,
-    w: snippet.w || 2,
-    h: snippet.h || 2
-}));
+ useEffect(() => {
+    const updatedSnippets = snippets.map(snippet => {
+      const height = calculateSnippetHeight(snippet);
+      const gridHeight = Math.ceil(height / 60);
+      return { ...snippet, h: Math.max(gridHeight, 2) };
+    });
+    setSnippets(updatedSnippets);
+  }, []);
 
-const onLayoutChange = (newLayout) => {
-  const updatedSnippets = newLayout.map(layoutItem => {
+  const layout = generateLayout(snippets);
+
+  const onLayoutChange = (newLayout) => {
+    const updatedSnippets = newLayout.map(layoutItem => {
       const snippet = snippets.find(snip => snip.id === layoutItem.i);
-      return {
-          ...snippet,
-          x: layoutItem.x,
-          y: layoutItem.y,
-          w: layoutItem.w,
-          h: layoutItem.h
-      };
-  });
-  setSnippets(updatedSnippets);
-};
+      return { ...snippet, ...layoutItem };
+    });
+    setSnippets(updatedSnippets);
+  };
 
-return (
-  <>
+  return (
+    <>
       <NavBar />
       <div className="App">
-      <GridLayout
-                className="layout"
-                layout={layout}
-                cols={12}
-                rowHeight={rowHeight}
-                width={windowSize.width}
-                onLayoutChange={onLayoutChange}
-                isResizable={true}
-            >
-                 {snippets.map(snippet => (
-                    <div key={snippet.id}>
-                        <SnippetsContent snippet={snippet} />
-                    </div>
-                ))}
-            </GridLayout>
+        <GridLayout
+          className="layout"
+          layout={layout}
+          cols={12}
+          rowHeight={60}
+          width={windowSize.width}
+          onLayoutChange={onLayoutChange}
+          isResizable={true}
+        >
+          {snippets.map(snippet => (
+            <div key={snippet.id}>
+              <SnippetsContent snippet={snippet} />
+            </div>
+          ))}
+        </GridLayout>
       </div>
       <FooterNotes />
-  </>
-);
+    </>
+  );
 }
 
 export default App;
