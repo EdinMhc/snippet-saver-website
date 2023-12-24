@@ -6,7 +6,6 @@ nav, footer {
 .App {
   justify-content: center;
   align-items: start;
-  padding: 20px;
   width: 100%;
   overflow: hidden;
   min-height: 100vh;
@@ -15,7 +14,6 @@ nav, footer {
 div.App {
     justify-content: space-between;
     align-items: start;
-    padding: 20px;
 }
 
 div.App > div {
@@ -23,23 +21,13 @@ div.App > div {
   flex-wrap: wrap;
   justify-content: center;
   align-items: start;
-  padding: 20px;
 }
 
 footer {
-  margin-top: auto; /* Push footer to the bottom */
-}
-
-.layout {
-  /* background-color: #222121;
-  border: 1px solid #252525; */
-  padding: 10px;
+  margin-top: auto;
 }
 
 .layout .react-grid-item {
-  /* border: 1px solid #ccc;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
   overflow: hidden;
   display: flex; 
   justify-content: center;
