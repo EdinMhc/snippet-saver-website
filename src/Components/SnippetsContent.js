@@ -18,7 +18,9 @@ function SnippetsContent({ snippet }) {
     return (
         <div className="snippet">
             <h3 className="snippet-title" style={titleStyle}>{name}</h3>
-             {h > 1 && <div className="snippet-content">{code}</div>}
+             {h > 1 && <div className="snippet-content"
+             dangerouslySetInnerHTML={{ __html: code }}
+             />}
         </div>
     );
 }
