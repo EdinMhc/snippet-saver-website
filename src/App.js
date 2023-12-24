@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './Components/NavBar';
 import SnippetsContent from './Components/SnippetsContent';
 import FooterNotes from './Components/FooterNotes';
@@ -23,6 +23,23 @@ function calculateSnippetHeight(snippet) {
 }
 
 function App() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const [gridWidth] = useState(window.innerWidth);
   const rowHeight = 60;
   useEffect(() => {
@@ -62,7 +79,7 @@ function App() {
         code: "{\n  \"pipingVariableNameCollection\": [\n    \"OptOut:CompanyLink\"\n  ],\n  \"emailAddressCollection\": [\n    {\n      \"respondentId\": 0,\n      \"emailAddress\": \"string@string.com\",\n      \"customHeaders\": {\n        \"additionalProp1\": \"string\",\n        \"additionalProp2\": \"string\",\n        \"additionalProp3\": \"string\"\n      }\n    }\n  ]\n}",
         isFavorite: true,
         url: "http://localhost:5000/swagger/index.html",
-        x: 4, y: 0, w: 3, h: 2
+        x: 3, y: 0, w: 3, h: 2
     },
     {
         id: "4",
@@ -70,7 +87,7 @@ function App() {
         code: "<label for=\"checkbox1702042728770\"></label><input type=\"checkbox\" id=\"checkbox1702042728770\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Themes black and white<div><br></div><div><label for=\"checkbox1702042754588\"></label><input type=\"checkbox\" id=\"checkbox1702042754588\" style=\"width: 12px; height: 12px;\">Search</div><div><br></div><div><label for=\"checkbox1702042753267\"></label><input type=\"checkbox\" id=\"checkbox1702042753267\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Json save file potential import feature</div><div><br></div><div><label for=\"checkbox1702042752060\"></label><input type=\"checkbox\" id=\"checkbox1702042752060\" data-checked=\"true\" style=\"width: 12px; height: 12px;\">Settings</div><div><br></div><div><label for=\"checkbox1702474771725\"></label><input type=\"checkbox\" id=\"checkbox1702474771725\"> Background script for popup.html so it has a cache feature<br></div>",
         isFavorite: false,
         url: "",
-        x: 4, y: 0, w: 3, h: 2
+        x: 3, y: 0, w: 3, h: 2
     },
     {
         id: "5",
@@ -78,26 +95,41 @@ function App() {
         code: "",
         isFavorite: false,
         url: "https://forsta.atlassian.net/wiki/spaces/FEH/pages/3234695260/How+to+use+Laptop+with+remote+k8s+environment",
-        x: 8, y: 0, w: 3, h: 2
+        x: 6, y: 0, w: 3, h: 2
     },
-    {
-        id: "6",
-        "code": "The <b>System.OutOfMemoryException you're encountering in your application, particularly when uploading an Excel file and using ClosedXML</b>, suggests that your application is running out of memory. This can be due to several reasons, especially when dealing with large Excel files. Here are some steps you can take to troubleshoot and potentially resolve this issue:<div>\n<b>Check File Size and Content</b>:\nDetermine the size of the Excel file you're trying to upload. Large files can consume a lot of memory, especially if they contain complex data, formulas, or images.\nIf possible, try uploading a smaller or simpler Excel file to see if the issue persists.</div><div>\n<b>Optimize Memory Usage</b>:</div><div>Ensure that your application is efficiently using memory. This includes disposing of objects that are no longer needed and avoiding unnecessary data duplication.\nIf you're processing the file in parts (like reading row by row), make sure you're not keeping references to objects longer than necessary.</div><div>\n<b>Increase Available Memory</b>:\nIf you're running your application in a constrained environment (like a server with limited resources or a 32-bit process), consider increasing the available memory or moving to a 64-bit environment.\nFor web applications, consider adjusting the memory limits in the application pool (if applicable).</div><div>\n<b>Use Streaming APIs</b>:\nIf ClosedXML is causing memory issues due to its in-memory model, consider using a more stream-based approach to handle Excel files, like EPPlus or NPOI, which can be more memory-efficient for large files.</div><div>\n<b>Check for Memory Leaks</b>:\nEnsure that your application doesn't have memory leaks. Tools like Visual Studio’s diagnostic tools, dotMemory, or a profiler can help identify leaks.</div><div>\n<b>Update Libraries</b>:\nMake sure you are using the latest version of ClosedXML, as newer versions might have optimizations or bug fixes that reduce memory usage.</div><div>\n<b>Split the File</b>:\nIf the file is exceptionally large, consider splitting it into smaller parts before processing.</div><div>\n<b>Server Configuration</b>:\nCheck the server configuration where the application is hosted. Ensure it has enough physical memory and is configured to allocate sufficient memory to your application.</div><div>\n<b>Error Handling and Logging</b>:\nImplement robust error handling and logging to capture more details when the exception occurs. This can provide insights into the specific operations that are leading to high memory usage.</div><div>\n<b>Consult Documentation and Community</b>:\nReview the documentation of ClosedXML for any recommendations on handling large files.\nConsider reaching out to the ClosedXML community or forums for advice. Others might have encountered and solved similar issues.\nIf after trying these steps the issue persists, you might need to consider an alternative approach to processing the Excel file or consulting with a developer experienced in handling large datasets and memory management in .NET applications.<br></div>",
-        "isFavorite": false,
-        "name": "Out of memory exception",
-        "url": "",
-        x: 8, y: 0, w: 3, h: 2
-      },
+    // {
+    //     id: "6",
+    //     "code": "The <b>System.OutOfMemoryException you're encountering in your application, particularly when uploading an Excel file and using ClosedXML</b>, suggests that your application is running out of memory. This can be due to several reasons, especially when dealing with large Excel files. Here are some steps you can take to troubleshoot and potentially resolve this issue:<div>\n<b>Check File Size and Content</b>:\nDetermine the size of the Excel file you're trying to upload. Large files can consume a lot of memory, especially if they contain complex data, formulas, or images.\nIf possible, try uploading a smaller or simpler Excel file to see if the issue persists.</div><div>\n<b>Optimize Memory Usage</b>:</div><div>Ensure that your application is efficiently using memory. This includes disposing of objects that are no longer needed and avoiding unnecessary data duplication.\nIf you're processing the file in parts (like reading row by row), make sure you're not keeping references to objects longer than necessary.</div><div>\n<b>Increase Available Memory</b>:\nIf you're running your application in a constrained environment (like a server with limited resources or a 32-bit process), consider increasing the available memory or moving to a 64-bit environment.\nFor web applications, consider adjusting the memory limits in the application pool (if applicable).</div><div>\n<b>Use Streaming APIs</b>:\nIf ClosedXML is causing memory issues due to its in-memory model, consider using a more stream-based approach to handle Excel files, like EPPlus or NPOI, which can be more memory-efficient for large files.</div><div>\n<b>Check for Memory Leaks</b>:\nEnsure that your application doesn't have memory leaks. Tools like Visual Studio’s diagnostic tools, dotMemory, or a profiler can help identify leaks.</div><div>\n<b>Update Libraries</b>:\nMake sure you are using the latest version of ClosedXML, as newer versions might have optimizations or bug fixes that reduce memory usage.</div><div>\n<b>Split the File</b>:\nIf the file is exceptionally large, consider splitting it into smaller parts before processing.</div><div>\n<b>Server Configuration</b>:\nCheck the server configuration where the application is hosted. Ensure it has enough physical memory and is configured to allocate sufficient memory to your application.</div><div>\n<b>Error Handling and Logging</b>:\nImplement robust error handling and logging to capture more details when the exception occurs. This can provide insights into the specific operations that are leading to high memory usage.</div><div>\n<b>Consult Documentation and Community</b>:\nReview the documentation of ClosedXML for any recommendations on handling large files.\nConsider reaching out to the ClosedXML community or forums for advice. Others might have encountered and solved similar issues.\nIf after trying these steps the issue persists, you might need to consider an alternative approach to processing the Excel file or consulting with a developer experienced in handling large datasets and memory management in .NET applications.<br></div>",
+    //     "isFavorite": false,
+    //     "name": "Out of memory exception",
+    //     "url": "",
+    //     x: 6, y: 0, w: 3, h: 2
+    //   },
       {
         id: "7",
         code: "account and password",
         isFavorite: false,
         name: "Netflix account and password",
         url : "",
-        x: 8, y: 0, w: 3, h: 2
+        x: 9, y: 0, w: 3, h: 2
+      },
+      {
+        id: "8",
+        code: "Some content",
+        isFavorite: false,
+        name: "Test1",
+        url : "",
+        x: 9, y: 0, w: 3, h: 2
+      },
+      {
+        id: "9",
+        code: "Some content",
+        isFavorite: false,
+        name: "Test2",
+        url : "",
+        x: 9, y: 0, w: 3, h: 2
       },
 ]);
-
 
   const layout = snippets.map(snippet => ({
     i: snippet.id.toString(),
@@ -130,7 +162,7 @@ return (
                 layout={layout}
                 cols={12}
                 rowHeight={rowHeight}
-                width={gridWidth}
+                width={windowSize.width}
                 onLayoutChange={onLayoutChange}
                 isResizable={true}
             >
