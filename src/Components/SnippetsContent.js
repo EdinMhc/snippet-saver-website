@@ -16,7 +16,7 @@ function SnippetsContent({ snippet }) {
       } : {};
 
       const handleDragStart = (e) => {
-        e.stopPropagation(); // Prevents the drag event from bubbling up
+        e.stopPropagation();
     };
 
     return (

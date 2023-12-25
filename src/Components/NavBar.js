@@ -7,7 +7,12 @@ function NavBar({ onImport }) {
         if (file) {
           onImport(file);
         }
-      };
+    };
+
+    const triggerFileUpload = () => {
+        document.getElementById('fileInput').click();
+    };
+
     return (
         <nav>
             <div>
@@ -15,7 +20,13 @@ function NavBar({ onImport }) {
                 <a href="#snippets">Snippets</a>
                 <a href="#support">Support</a>
                 <a href="#contact">Contact</a>
-                <input type="file" accept=".json" onChange={handleFileChange} />
+                <img 
+                    src="/uploadIconWhite.svg" 
+                    alt="Upload" 
+                    onClick={triggerFileUpload} 
+                    style={{ cursor: 'pointer', width: '22px', height: '21px'}}
+                />
+                <input type="file" id="fileInput" accept=".json" onChange={handleFileChange} style={{ display: 'none' }} />
             </div>
         </nav>
     );
