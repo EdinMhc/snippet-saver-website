@@ -5,7 +5,7 @@ import 'react-resizable/css/styles.css';
 
 function SnippetsContent({ snippet }) {
     const { name, code, h } = snippet;
-
+    
     const titleStyle = h === 1 ? {
         display: 'flex',
         alignItems: 'center',
@@ -15,10 +15,14 @@ function SnippetsContent({ snippet }) {
         textAlign: 'center'
       } : {};
 
+      const handleDragStart = (e) => {
+        e.stopPropagation(); // Prevents the drag event from bubbling up
+    };
+
     return (
         <div className="snippet">
             <h3 className="snippet-title" style={titleStyle}>{name}</h3>
-             {h > 1 && <div className="snippet-content"
+             {h > 1 && <div className="snippet-content" onMouseDown={handleDragStart}
              dangerouslySetInnerHTML={{ __html: code }}
              />}
         </div>
