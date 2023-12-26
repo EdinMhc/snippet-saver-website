@@ -13,12 +13,14 @@ export function calculateSnippetHeight(snippet) {
     return height;
   }
 
-  export function generateLayout(snippets) {
-    return snippets.map(snippet => ({
-      i: snippet.id.toString(),
-      x: snippet.x || 0,
-      y: snippet.y || 0,
-      w: snippet.w || 2,
-      h: snippet.h || 2
-    }));
-  }
+  export const generateLayout = (snippets) => {
+    return snippets.map((snippet, index) => {
+      const id = snippet.id.toString();
+      const x = snippet.x;
+      const y = snippet.y;
+      const w = snippet.w || 2;
+      const h = snippet.h || 2;
+  
+      return { i: id, x, y, w, h };
+    });
+  };

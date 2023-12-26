@@ -1,0 +1,43 @@
+.snippet-form-container {
+    background-color: #b2b2b2;
+    padding: 15px;
+    border-radius: 5px;
+    width: 330px;
+    height: 311px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .snippet-form-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .snippet-form-container label {
+    margin-bottom: 5px;
+  }
+  
+  .snippet-form-container input[type="text"],
+  .snippet-form-container textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+  }
+  
+  .snippet-form-container .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .snippet-form-container .form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .snippet-form-container .form-actions button:hover {
+    opacity: 0.9;
+  }
+  
