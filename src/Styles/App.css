@@ -48,13 +48,17 @@ footer {
   width: 30px;
   height: 30px;
   line-height: 30px;
-  text-align: center; /* Center the plus sign horizontally */
-  margin: 10px auto; /* Vertical margin and horizontal auto for centering */
-  font-size: 24px; /* Size of the plus sign */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  background-color: #b2b2b2; /* Background color */
-  color: white; /* Color of the plus sign */
-  border-radius: 50%; /* Make it circular */
+  text-align: center;
+  margin: 10px auto;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: #b2b2b2;
+  color: white;
+  border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
+}
+
+.add-snippet-container {
+  position: relative;
 }

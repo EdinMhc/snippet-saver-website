@@ -1,11 +1,17 @@
 .snippet-form-container {
-    background-color: #b2b2b2;
-    padding: 15px;
-    border-radius: 5px;
-    width: 330px;
-    height: 311px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  position: absolute;
+  top: 100%; /* Position it below the plus button */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for exact centering */
+  background-color: #b2b2b2;
+  padding: 15px;
+  border-radius: 5px;
+  width: 330px;
+  height: 311px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10; /* Ensure it's above other elements */
+}
+
   
   .snippet-form-container form {
     display: flex;

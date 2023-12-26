@@ -22,13 +22,15 @@ function App() {
   return (
     <>
      <NavBar onImport={handleImports(setSnippets)} />
-    <div className="add-snippet-button" onClick={() => setShowForm(true)}>+</div>
-    {showForm && (
-      <SnippetForm
-          onAdd={handleAddSnippet(snippets, setSnippets, setShowForm)}
-          onCancel={() => setShowForm(false)}
+    <div className='add-snippet-container'>
+      <div className="add-snippet-button" onClick={() => setShowForm(true)}>+</div>
+      {showForm && (
+        <SnippetForm
+        onAdd={handleAddSnippet(snippets, setSnippets, setShowForm)}
+        onCancel={() => setShowForm(false)}
         />
-    )}
+        )}
+    </div>
     <div className="App">
       <GridLayout
         className="layout"
