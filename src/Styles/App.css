@@ -42,3 +42,19 @@ footer {
   height: 100%;
   overflow: auto;
 }
+
+.add-snippet-button{
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center; /* Center the plus sign horizontally */
+  margin: 10px auto; /* Vertical margin and horizontal auto for centering */
+  font-size: 24px; /* Size of the plus sign */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  background-color: #b2b2b2; /* Background color */
+  color: white; /* Color of the plus sign */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
