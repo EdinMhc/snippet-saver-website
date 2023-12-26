@@ -23,7 +23,9 @@ function App() {
     <>
      <NavBar onImport={handleImports(setSnippets)} />
     <div className='add-snippet-container'>
-      <div className="add-snippet-button" onClick={() => setShowForm(true)}>+</div>
+      <div className="add-snippet-button" onClick={() => setShowForm(true)}>
+      <img src={`${process.env.PUBLIC_URL}/addIcon.png`} alt="Add Snippet" />
+      </div>
       {showForm && (
         <SnippetForm
         onAdd={handleAddSnippet(snippets, setSnippets, setShowForm)}

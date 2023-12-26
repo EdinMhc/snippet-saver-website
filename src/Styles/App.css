@@ -43,22 +43,20 @@ footer {
   overflow: auto;
 }
 
-.add-snippet-button{
+.add-snippet-button {
   display: block;
   width: 30px;
   height: 30px;
-  line-height: 30px;
-  text-align: center;
   margin: 10px auto;
-  font-size: 24px;
   cursor: pointer;
-  background-color: #b2b2b2;
-  color: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
-
+.add-snippet-button img {
+  width: 100%;
+  height: auto;
+}
 .add-snippet-container {
   position: relative;
 }
