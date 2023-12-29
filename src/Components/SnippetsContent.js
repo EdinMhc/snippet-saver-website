@@ -1,22 +1,29 @@
 import React from 'react';
 import '../Styles/SnippetContent.css';
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
 
 function SnippetsContent({ snippet }) {
     const { name, code, url } = snippet;
-    if(code === ''){
-    }
+
+    const hasContent = code && code.trim() !== '';
+
+    const baseWidth = 150;
+    const padding = 20;
+    const charWidth = 10;
+    const calculatedWidth = Math.max(name.length * charWidth + padding, baseWidth);
+
+    const snippetStyle = hasContent ? {} : { width: `${calculatedWidth}px`};
+
     return (
-        <div className="snippet">
+        <div className="snippet" style={snippetStyle}>
             <h3 className="snippet-title">{name}</h3>
-            <div className="snippet-style-box">
-             {<div className="snippet-content" dangerouslySetInnerHTML={{ __html: code }}
-             />}
-            </div>
-             <div className="snippet-url">
+            {hasContent && (
+                <div className="snippet-style-box">
+                    <div className="snippet-content" dangerouslySetInnerHTML={{ __html: code }} />
+                </div>
+            )}
+            <div className="snippet-url">
                 {url}
-             </div>
+            </div>
         </div>
     );
 }

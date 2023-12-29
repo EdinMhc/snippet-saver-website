@@ -4,11 +4,12 @@ nav, footer {
 }
 
 .App {
-  justify-content: center;
+  justify-content: flex-start;
   align-items: start;
   width: 100%;
   overflow: hidden;
   min-height: 100vh;
+  flex-wrap: wrap;
 }
 
 div.App {
@@ -19,7 +20,7 @@ div.App {
 div.App > div {
   flex-grow: 1;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: start;
 }
 
