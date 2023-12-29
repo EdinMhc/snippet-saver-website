@@ -12,10 +12,6 @@ export function handleAddSnippet(snippets, setSnippets, setShowForm) {
     const newSnippetWithPosition = {
       ...newSnippet,
       id: `snippet-${snippets.length + 1}`,
-      x: 0,
-      y: 0,
-      w: 2,
-      h: 2,
     };
 
     setSnippets([newSnippetWithPosition, ...updatedSnippets]);

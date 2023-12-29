@@ -4,27 +4,19 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
 function SnippetsContent({ snippet }) {
-    const { name, code, h } = snippet;
-    
-    const titleStyle = h === 1 ? {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        margin: 0,
-        textAlign: 'center'
-      } : {};
-
-      const handleDragStart = (e) => {
-        e.stopPropagation();
-    };
-
+    const { name, code, url } = snippet;
+    if(code === ''){
+    }
     return (
         <div className="snippet">
-            <h3 className="snippet-title" style={titleStyle}>{name}</h3>
-             {h > 1 && <div className="snippet-content" onMouseDown={handleDragStart}
-             dangerouslySetInnerHTML={{ __html: code }}
+            <h3 className="snippet-title">{name}</h3>
+            <div className="snippet-style-box">
+             {<div className="snippet-content" dangerouslySetInnerHTML={{ __html: code }}
              />}
+            </div>
+             <div className="snippet-url">
+                {url}
+             </div>
         </div>
     );
 }

@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import NavBar from './Components/NavBar';
 import SnippetsContent from './Components/SnippetsContent';
 import FooterNotes from './Components/FooterNotes';
-import GridLayout from 'react-grid-layout';
-import { generateLayout } from './Utils/layoutUtils/calculateSnippetHeight';
-import { handleImports } from './Utils/layoutUtils/handleImport';
-import { onLayoutChange } from './Utils/layoutUtils/onLayoutChange';
 import { handleAddSnippet } from './Utils/layoutUtils/handleAddSnippet';
 import useWindowSize from './hooks/useWindowSize';
 import SnippetForm from './Components/SnippetForm';
@@ -17,11 +13,10 @@ function App() {
   const windowSize = useWindowSize();
   const [snippets, setSnippets] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const layout = generateLayout(snippets);
 
   return (
     <>
-     <NavBar onImport={handleImports(setSnippets)} />
+     <NavBar/>
     <div className='add-snippet-container'>
       <div className="add-snippet-button" onClick={() => setShowForm(true)}>
       <img src={`${process.env.PUBLIC_URL}/addIcon.png`} alt="Add Snippet" />
@@ -34,21 +29,11 @@ function App() {
         )}
     </div>
     <div className="App">
-      <GridLayout
-        className="layout"
-        layout={layout}
-        cols={12}
-        rowHeight={60}
-        width={windowSize.width}
-        onLayoutChange={onLayoutChange(snippets, setSnippets)}
-        isResizable={true}
-      >
         {snippets.map(snippet => (
           <div key={snippet.id}>
             <SnippetsContent snippet={snippet} />
           </div>
         ))}
-      </GridLayout>
     </div>
     <FooterNotes />
     </>
