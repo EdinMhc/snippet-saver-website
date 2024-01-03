@@ -45,3 +45,11 @@ footer {
 .add-snippet-container {
   position: relative;
 }
+
+.outline-snippet-container{
+  background-color: rgb(158, 158, 158);
+  height: 550px;
+  width: 175px;
+  margin: 10px;
+  border-radius: 15px;
+}
